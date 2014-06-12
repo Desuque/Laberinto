@@ -1,0 +1,115 @@
+# depslib dependency file v1.0
+1402598648 source:c:\users\desuque leandro\desktop\proyecto caminante\tp1\cargadorderecorridos.cpp
+	<iostream>
+	"CargadorDeRecorridos.h"
+
+1402598680 c:\users\desuque leandro\desktop\proyecto caminante\tp1\cargadorderecorridos.h
+	<fstream>
+	"Lista.h"
+	<string>
+
+1401181555 c:\users\desuque leandro\desktop\proyecto caminante\tp1\lista.h
+	"Nodo.h"
+	<iostream>
+	<string>
+	<sstream>
+
+1400852442 c:\users\desuque leandro\desktop\proyecto caminante\tp1\nodo.h
+
+1402598685 source:c:\users\desuque leandro\desktop\proyecto caminante\tp1\main.cpp
+	<iostream>
+	"cargadorDeRecorridos.h"
+	"Caminante.h"
+	"Mochila.h"
+	"Objeto.h"
+	"Lista.h"
+
+1402583112 source:c:\users\desuque leandro\desktop\proyecto caminante\tp1\caminante.cpp
+	"Caminante.h"
+	"Mochila.h"
+	"GPS.h"
+	"Mapa.h"
+	<string>
+
+1402541231 c:\users\desuque leandro\desktop\proyecto caminante\tp1\caminante.h
+	"Lista.h"
+	"Mochila.h"
+	"GPS.h"
+
+1402513707 c:\users\desuque leandro\desktop\proyecto caminante\tp1\mochila.h
+	<string>
+	"Objeto.h"
+	"Lista.h"
+
+1402512708 c:\users\desuque leandro\desktop\proyecto caminante\tp1\objeto.h
+	<string>
+
+1402543173 source:c:\users\desuque leandro\desktop\proyecto caminante\tp1\mochila.cpp
+	<stdio.h>
+	"Objeto.h"
+	"Mochila.h"
+	"Lista.h"
+
+1402516336 source:c:\users\desuque leandro\desktop\proyecto caminante\tp1\objeto.cpp
+	"Objeto.h"
+	<string>
+	<iostream>
+
+1402550401 c:\users\desuque leandro\desktop\proyecto caminante\tp1\gps.h
+	"Mapa.h"
+	<string>
+
+1402586302 source:c:\users\desuque leandro\desktop\proyecto caminante\tp1\gps.cpp
+	"GPS.h"
+	"Mapa.h"
+	<string>
+	<stdlib.h>
+	<iostream>
+
+1402585826 c:\users\desuque leandro\desktop\proyecto caminante\tp1\mapa.h
+	"Lista.h"
+	"Nodo.h"
+	"EasyBMP.h"
+
+1164946968 source:c:\users\desuque leandro\desktop\proyecto caminante\tp1\easybmp.cpp
+	"EasyBMP.h"
+
+1164945936 c:\users\desuque leandro\desktop\proyecto caminante\tp1\easybmp.h
+	<iostream>
+	<cmath>
+	<cctype>
+	<cstring>
+	<stdio.h>
+	<cstdio>
+	"EasyBMP_DataStructures.h"
+	"EasyBMP_BMP.h"
+	"EasyBMP_VariousBMPutilities.h"
+
+1164945754 c:\users\desuque leandro\desktop\proyecto caminante\tp1\easybmp_datastructures.h
+
+1164946832 c:\users\desuque leandro\desktop\proyecto caminante\tp1\easybmp_bmp.h
+
+1164945762 c:\users\desuque leandro\desktop\proyecto caminante\tp1\easybmp_variousbmputilities.h
+
+1402586313 source:c:\users\desuque leandro\desktop\proyecto caminante\tp1\mapa.cpp
+	<iostream>
+	<string>
+	"Mapa.h"
+	"EasyBMP.h"
+	"EasyBMP_Font.h"
+	"Lista.h"
+	"Nodo.h"
+
+1163307516 source:c:\users\desuque leandro\desktop\proyecto caminante\tp1\easybmp_font.cpp
+	"EasyBMP_Geometry.h"
+	"EasyBMP_Font.h"
+
+1163307476 c:\users\desuque leandro\desktop\proyecto caminante\tp1\easybmp_geometry.h
+	"EasyBMP.h"
+
+1163307500 c:\users\desuque leandro\desktop\proyecto caminante\tp1\easybmp_font.h
+	"EasyBMP.h"
+
+1163307482 source:c:\users\desuque leandro\desktop\proyecto caminante\tp1\easybmp_geometry.cpp
+	"EasyBMP_Geometry.h"
+
