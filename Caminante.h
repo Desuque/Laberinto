@@ -4,10 +4,12 @@
 #include "Lista.h"
 #include "Mochila.h"
 #include "GPS.h"
+#include "Mapa.h"
 
 class Caminante{
 private:
     Lista<Lista<string>*>* recorridos;
+    Lista<pair<int, int> > listaDeCoordenadasRelativas;
     Mochila* unaMochila;
     GPS unGPS;
     Mapa unMapa;
@@ -34,6 +36,8 @@ public:
     void enviarInformacionAlMapa();
 
     Lista<Objeto>* obtenerObjetosDeLaMochila();
+
+    void dibujarBMP();
 };
 
 #endif // CAMINANTE_H_INCLUDED

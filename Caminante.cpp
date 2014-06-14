@@ -18,6 +18,7 @@ void Caminante::logisticaDelRecorrido(Lista<Lista<string>*>* recorridos){
     while (recorridos->avanzarCursor()){
         recorridoActual = recorridos->obtenerCursor();
         obtenerInformacionDel(recorridoActual);
+        enviarInformacionAlMapa();
     }
 }
 
@@ -42,17 +43,21 @@ void Caminante::enviarObjetosDelCaminoALaMochila(string informacionLeida){
 
 void Caminante::enviarAccionesAlGPS(string informacionLeida){
     /*
-    * El GPS no discrimina informacion ya que necesita conocer, ademas de los pasos y bifurcaciones
+    * La informacion no se filtra ya que el GPS necesita conocer, ademas de los pasos y bifurcaciones
     * los lugares donde se ha levantado o dejado un Objeto
     */
     unGPS.discriminarInformacion(informacionLeida);
 }
 
 void Caminante::enviarInformacionAlMapa(){
-    //unMapa.defase(unGPS.obtenerDefase());
-    unMapa.colorActual(unGPS.obtenerCodigoDeColor());
-    unMapa.calcularTamanioBMP(unGPS.obtenerListaDeCoordenadas());
-    unMapa.dibujarRecorrido(unGPS.obtenerListaDeCoordenadas());
+    unMapa.cargarColor(unGPS.obtenerCodigoDeColor());
+    unGPS.generarListaDeCoordenadasRelativas();
+    unMapa.cargarRecorrido(unGPS.obtenerListaDeCoordenadasRelativas());
+    unGPS.vaciarListaDeCoordenadas();
+}
+
+void Caminante::dibujarBMP(){
+    unMapa.dibujarRecorridos();
 }
 
 Lista<Objeto>* Caminante::obtenerObjetosDeLaMochila(){
@@ -60,4 +65,5 @@ Lista<Objeto>* Caminante::obtenerObjetosDeLaMochila(){
 }
 
 Caminante::~Caminante(){
+    delete unaMochila;
 }

@@ -1,5 +1,5 @@
 #include <iostream>
-#include "cargadorDeRecorridos.h"
+#include "CargadorDeRecorridos.h"
 #include "Caminante.h"
 #include "Mochila.h"
 #include "Objeto.h"
@@ -9,22 +9,23 @@ using namespace std;
 
 int main()
 {
-    cout<<"El laberinto maldito:"<<endl;
-    cout<<"====================="<<endl;
-    cout<<endl;
     string archivoDeCaminos="Caminos.txt";
     Lista<Lista<string>*>* recorridos;
     Mochila unaMochila;
     Lista<Objeto>* listaDeObjetos;
 
+    cout<<"El laberinto maldito:"<<endl;
+    cout<<"====================="<<endl;
+    cout<<endl;
+
+    /* Cargo los recorridos en memoria */
     CargadorDeRecorridos registroDeRecorridos(archivoDeCaminos);
     recorridos = registroDeRecorridos.obtenerRecorridos();
 
+    /* Envio los recorridos al Caminante */
     Caminante unCaminante(recorridos);
     unCaminante.logisticaDelRecorrido(recorridos);
-
-    /* Dibuja el recorrido en el BMP */
-    unCaminante.enviarInformacionAlMapa();
+    unCaminante.dibujarBMP();
 
     //Muestro por pantalla los objetos de la mochila
     cout<<"Objetos guardados en la mochila:"<<endl;

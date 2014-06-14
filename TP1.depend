@@ -16,25 +16,26 @@
 
 1400852442 c:\users\desuque leandro\desktop\proyecto caminante\tp1\nodo.h
 
-1402598685 source:c:\users\desuque leandro\desktop\proyecto caminante\tp1\main.cpp
+1402701922 source:c:\users\desuque leandro\desktop\proyecto caminante\tp1\main.cpp
 	<iostream>
-	"cargadorDeRecorridos.h"
+	"CargadorDeRecorridos.h"
 	"Caminante.h"
 	"Mochila.h"
 	"Objeto.h"
 	"Lista.h"
 
-1402583112 source:c:\users\desuque leandro\desktop\proyecto caminante\tp1\caminante.cpp
+1402704528 source:c:\users\desuque leandro\desktop\proyecto caminante\tp1\caminante.cpp
 	"Caminante.h"
 	"Mochila.h"
 	"GPS.h"
 	"Mapa.h"
 	<string>
 
-1402541231 c:\users\desuque leandro\desktop\proyecto caminante\tp1\caminante.h
+1402700002 c:\users\desuque leandro\desktop\proyecto caminante\tp1\caminante.h
 	"Lista.h"
 	"Mochila.h"
 	"GPS.h"
+	"Mapa.h"
 
 1402513707 c:\users\desuque leandro\desktop\proyecto caminante\tp1\mochila.h
 	<string>
@@ -55,18 +56,17 @@
 	<string>
 	<iostream>
 
-1402550401 c:\users\desuque leandro\desktop\proyecto caminante\tp1\gps.h
-	"Mapa.h"
+1402704454 c:\users\desuque leandro\desktop\proyecto caminante\tp1\gps.h
 	<string>
+	"Lista.h"
 
-1402586302 source:c:\users\desuque leandro\desktop\proyecto caminante\tp1\gps.cpp
+1402704503 source:c:\users\desuque leandro\desktop\proyecto caminante\tp1\gps.cpp
 	"GPS.h"
-	"Mapa.h"
 	<string>
 	<stdlib.h>
 	<iostream>
 
-1402585826 c:\users\desuque leandro\desktop\proyecto caminante\tp1\mapa.h
+1402699512 c:\users\desuque leandro\desktop\proyecto caminante\tp1\mapa.h
 	"Lista.h"
 	"Nodo.h"
 	"EasyBMP.h"
@@ -91,7 +91,7 @@
 
 1164945762 c:\users\desuque leandro\desktop\proyecto caminante\tp1\easybmp_variousbmputilities.h
 
-1402586313 source:c:\users\desuque leandro\desktop\proyecto caminante\tp1\mapa.cpp
+1402703685 source:c:\users\desuque leandro\desktop\proyecto caminante\tp1\mapa.cpp
 	<iostream>
 	<string>
 	"Mapa.h"

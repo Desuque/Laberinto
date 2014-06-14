@@ -1,40 +1,62 @@
 #include "GPS.h"
-#include "Mapa.h"
 #include <string>
 #include <stdlib.h>
 #include <iostream>
+
+const int x=0;
+const int y=1;
 
 GPS::GPS(){
     this->sentidoEjeActual=0;
     this->cantidadDeCaminos=0;
     this->direccionEnEje=' ';
     this->codigoDeColor="";
-    this->defase = new int[2];
-}
-
-string GPS::obtenerCodigoDeColor(){
-    return this->codigoDeColor;
+    this->nuevoOrigen = new int[2];
+    this->listaDeCoordenadasRelativas = new Lista<pair<int, int> >;
+    this->listaDeCoordenadas = new Lista<pair<int, int> >;
+    maxEste=0, maxOeste=0, maxNorte=0, maxSur=0, xActual=0, yActual=0;
 }
 
 void GPS::discriminarInformacion(string informacionLeida){
-    if (informacionLeida!="PLL"){
-        if ( (informacionLeida[0]=='P') && (informacionLeida[1]=='P') ){
-            this->codigoDeColor=informacionLeida;
-        }
-        else if (informacionLeida[0]=='G'){
-            obtenerDireccion(informacionLeida);
-        }
-        else if (informacionLeida[0]=='A'){
+    if ( (informacionLeida[0]=='P') && (informacionLeida[1]=='P') ){
+        cargarColorActual(informacionLeida);
+    }
+    else if (informacionLeida[0]=='G'){
+        obtenerDireccion(informacionLeida);
+    }
+    else if ( (informacionLeida[0]=='A') || (informacionLeida=="PLL") ){
+        calcularNuevoOrigen(informacionLeida);
+        if (informacionLeida!="PLL"){
             cargarCoordenada(informacionLeida);
         }
     }
-    else{
-        /* Cuando termina un camino, se asigna un margen en X arbitrario */
-
-        //FALTA PROGRAMARLO
-
-    }
 }
+
+void GPS::cargarColorActual(string rgb){
+    int codigoDeColor=0;
+    int j=0;
+    string rgbAuxiliar;
+    for(unsigned int i=3; i<rgb.length(); i++){
+        if((rgb[i])!=' '){
+            rgbAuxiliar=rgbAuxiliar+rgb[i];
+        }
+        else{
+            istringstream convert(rgbAuxiliar);
+            convert>>codigoDeColor;
+            colorActual[j]=codigoDeColor;
+            rgbAuxiliar="";
+            j++;
+        }
+    }
+    istringstream convert(rgbAuxiliar);
+    convert>>codigoDeColor;
+    colorActual[j]=codigoDeColor;
+}
+
+int* GPS::obtenerCodigoDeColor(){
+    return this->colorActual;
+}
+
 
 void GPS::obtenerDireccion(string informacionLeida){
     this->direccionEnEje=informacionLeida[1];
@@ -46,73 +68,87 @@ void GPS::obtenerDireccion(string informacionLeida){
     }
 }
 
-void GPS::calcularDefase(){
-    /*
-    * Si los pasos totales quedan en negativo, significa que se salio del origen
-    * (0,0) impuesto por la libreria EasyBMP, por lo tanto, reacomodamos el origen
-    * sumando a todos los pasos el modulo del corrimiento calculado.
-    */
+void GPS::calcularNuevoOrigen(string informacionLeida){
+    if (informacionLeida!="PLL"){
 
-    int pasosTotalesX=0;
-    int pasosTotalesY=0;
-
-    listaDeCoordenadas.iniciarCursor();
-    while (listaDeCoordenadas.avanzarCursor()){
-        if (pasosTotalesX>(listaDeCoordenadas.obtenerCursor()).first ){
-            pasosTotalesX += (listaDeCoordenadas.obtenerCursor()).first;
+        //Metodo a parte
+        string coordenadaAuxiliar="";
+        int coordenada=0;
+        for (unsigned int i=2; i<informacionLeida.length(); i++){
+            coordenadaAuxiliar+=informacionLeida[i];
         }
-        pasosTotalesY += (listaDeCoordenadas.obtenerCursor()).second;
-    }
+        istringstream convert(coordenadaAuxiliar);
+        convert>>coordenada;
+        //Metodo a parte
 
-    if (pasosTotalesX<0){
-        pasosTotalesX=abs(pasosTotalesX);
+        if (direccionEnEje == 'E'){
+            xActual = xActual + coordenada;
+            if (xActual > maxEste){
+                maxEste = xActual;
+            }
+        }
+
+        if(direccionEnEje == 'O'){
+            xActual = xActual - coordenada;
+            if (xActual < maxOeste){
+                maxOeste = xActual;
+            }
+        }
+
+        if(direccionEnEje == 'N'){
+            yActual = yActual + coordenada;
+            if (yActual < maxNorte){
+                maxNorte = yActual;
+            }
+        }
+
+        if(direccionEnEje == 'S'){
+            yActual = yActual + coordenada;
+            if (yActual > maxSur){
+                maxSur = yActual;
+            }
+        }
     }
     else{
-        pasosTotalesX=0;
+        this->nuevoOrigen[x]=abs(maxOeste);
+        this->nuevoOrigen[y]=abs(maxNorte);
     }
-
-    if (pasosTotalesY<0){
-        pasosTotalesY=abs(pasosTotalesY);
-    }
-    else{
-        pasosTotalesY=0;
-    }
-
-    defase[0]=pasosTotalesX;
-    defase[1]=pasosTotalesY;
-
-    cout<<pasosTotalesX<<endl;
-    cout<<pasosTotalesY<<endl;
 }
-
-int* GPS::obtenerDefase(){
-    return this->defase;
-}
-
 
 void GPS::cargarCoordenada(string informacionLeida){
-    string coordenadaAuxiliar="";
-    int coordenada=0;
-    for (unsigned int i=2; i<informacionLeida.length(); i++){
-        coordenadaAuxiliar+=informacionLeida[i];
-    }
-    istringstream convert(coordenadaAuxiliar);
-    convert>>coordenada;
+        string coordenadaAuxiliar="";
+        int coordenada=0;
+        for (unsigned int i=2; i<informacionLeida.length(); i++){
+            coordenadaAuxiliar+=informacionLeida[i];
+        }
+        istringstream convert(coordenadaAuxiliar);
+        convert>>coordenada;
+
 
     /* Guardo las coordenadas segun su direccion y sentido */
     coordenada=coordenada*sentidoEjeActual;
 
     if ((direccionEnEje=='N') || (direccionEnEje=='S')){
-        listaDeCoordenadas.agregar(make_pair(0,coordenada));
+        listaDeCoordenadas->agregar(make_pair(0,coordenada));
     }
     else if ((direccionEnEje=='O') || (direccionEnEje=='E')){
-        listaDeCoordenadas.agregar(make_pair(coordenada,0));
+        listaDeCoordenadas->agregar(make_pair(coordenada,0));
     }
+    cout<<coordenada<<endl;
 }
 
-Lista<pair<int, int> > GPS::obtenerListaDeCoordenadas(){
-    //calcularDefase();
-    return this->listaDeCoordenadas;
+void GPS::generarListaDeCoordenadasRelativas(){
+    /*No sirve, asi que esto no hace nada por ahora */
+    listaDeCoordenadasRelativas=listaDeCoordenadas;
+}
+
+void GPS::vaciarListaDeCoordenadas(){
+    delete listaDeCoordenadas;
+    this->listaDeCoordenadas = new Lista<pair<int, int> >;
+}
+
+Lista<pair<int, int> >* GPS::obtenerListaDeCoordenadasRelativas(){
+    return this->listaDeCoordenadasRelativas;
 }
 
 GPS::~GPS(){
