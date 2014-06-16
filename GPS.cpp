@@ -8,13 +8,16 @@ const int y=1;
 
 GPS::GPS(){
     this->sentidoEjeActual=0;
-    this->cantidadDeCaminos=0;
     this->direccionEnEje=' ';
     this->codigoDeColor="";
-    this->nuevoOrigen = new int[2];
-    this->listaDeCoordenadasRelativas = new Lista<pair<int, int> >;
     this->listaDeCoordenadas = new Lista<pair<int, int> >;
-    maxEste=0, maxOeste=0, maxNorte=0, maxSur=0, xActual=0, yActual=0;
+    this->listaDePasos = new Lista<pair<int, int> >;
+    this->coordenadasPorMarcar = new Lista<pair<int, int> >;
+    this->bifurcaciones = new Lista<Bifurcacion>;
+    this->MaximoX=0;
+    this->MaximoY=0;
+    this->MinimoX=0;
+    this->MinimoY=0;
 }
 
 void GPS::discriminarInformacion(string informacionLeida){
@@ -24,12 +27,21 @@ void GPS::discriminarInformacion(string informacionLeida){
     else if (informacionLeida[0]=='G'){
         obtenerDireccion(informacionLeida);
     }
-    else if ( (informacionLeida[0]=='A') || (informacionLeida=="PLL") ){
-        calcularNuevoOrigen(informacionLeida);
-        if (informacionLeida!="PLL"){
-            cargarCoordenada(informacionLeida);
-        }
+    else if ( (informacionLeida[0]=='A')){
+        cargarCoordenada(informacionLeida);
     }
+    else if ( (informacionLeida[0]=='L') || (informacionLeida[0]=='T') ){
+        cargarCoordenadasPorMarcar();
+    }
+    /*
+    else if (informacionLeida[0]=='B'){
+        cargarBifurcacion(informacionLeida);*/
+    /* Las bifurcaciones tambien deben marcarse en el Mapa, por lo que agrego la coordenada*/
+    /*    cargarCoordenadasPorMarcar();
+    }
+    else if (informacionLeida[0]=='U'){
+    }
+    */
 }
 
 void GPS::cargarColorActual(string rgb){
@@ -68,78 +80,58 @@ void GPS::obtenerDireccion(string informacionLeida){
     }
 }
 
-void GPS::calcularNuevoOrigen(string informacionLeida){
-    if (informacionLeida!="PLL"){
-
-        //Metodo a parte
-        string coordenadaAuxiliar="";
-        int coordenada=0;
-        for (unsigned int i=2; i<informacionLeida.length(); i++){
-            coordenadaAuxiliar+=informacionLeida[i];
+void GPS::calcularNuevoOrigen(){
+    listaDeCoordenadas->iniciarCursor();
+    while (listaDeCoordenadas->avanzarCursor()){
+        if (listaDeCoordenadas->obtenerCursor().first>MaximoX){
+            MaximoX=listaDeCoordenadas->obtenerCursor().first;
         }
-        istringstream convert(coordenadaAuxiliar);
-        convert>>coordenada;
-        //Metodo a parte
-
-        if (direccionEnEje == 'E'){
-            xActual = xActual + coordenada;
-            if (xActual > maxEste){
-                maxEste = xActual;
-            }
+        else if (listaDeCoordenadas->obtenerCursor().first<MinimoX){
+            MinimoX=listaDeCoordenadas->obtenerCursor().first;
         }
-
-        if(direccionEnEje == 'O'){
-            xActual = xActual - coordenada;
-            if (xActual < maxOeste){
-                maxOeste = xActual;
-            }
+        else if (listaDeCoordenadas->obtenerCursor().second>MaximoY){
+            MaximoY=listaDeCoordenadas->obtenerCursor().first;
         }
-
-        if(direccionEnEje == 'N'){
-            yActual = yActual + coordenada;
-            if (yActual < maxNorte){
-                maxNorte = yActual;
-            }
-        }
-
-        if(direccionEnEje == 'S'){
-            yActual = yActual + coordenada;
-            if (yActual > maxSur){
-                maxSur = yActual;
-            }
+        else if (listaDeCoordenadas->obtenerCursor().first<MinimoY){
+            MinimoX=listaDeCoordenadas->obtenerCursor().first;
         }
     }
-    else{
-        this->nuevoOrigen[x]=abs(maxOeste);
-        this->nuevoOrigen[y]=abs(maxNorte);
-    }
+
+    nuevoOrigen=make_pair(abs(MinimoX),abs(MinimoY));
+}
+
+pair<int, int> GPS::obtenerNuevoOrigen(){
+    calcularNuevoOrigen();
+    return this->nuevoOrigen;
 }
 
 void GPS::cargarCoordenada(string informacionLeida){
-        string coordenadaAuxiliar="";
-        int coordenada=0;
-        for (unsigned int i=2; i<informacionLeida.length(); i++){
-            coordenadaAuxiliar+=informacionLeida[i];
-        }
-        istringstream convert(coordenadaAuxiliar);
-        convert>>coordenada;
+    string pasosAuxiliar="";
+    int pasos=0;
+    for (unsigned int i=2; i<informacionLeida.length(); i++){
+        pasosAuxiliar+=informacionLeida[i];
+    }
+    istringstream convert(pasosAuxiliar);
+    convert>>pasos;
 
+    /* Guardo los pasos segun su direccion y sentido */
+    pasos=pasos*sentidoEjeActual;
 
-    /* Guardo las coordenadas segun su direccion y sentido */
-    coordenada=coordenada*sentidoEjeActual;
+    pair<int, int> posicionActual=obtenerPosicionActual();
 
     if ((direccionEnEje=='N') || (direccionEnEje=='S')){
-        listaDeCoordenadas->agregar(make_pair(0,coordenada));
+        listaDeCoordenadas->agregar(make_pair(posicionActual.first,posicionActual.second+pasos));
+        listaDePasos->agregar(make_pair(0,pasos));
     }
     else if ((direccionEnEje=='O') || (direccionEnEje=='E')){
-        listaDeCoordenadas->agregar(make_pair(coordenada,0));
+        listaDeCoordenadas->agregar(make_pair(posicionActual.first+pasos,posicionActual.second));
+        listaDePasos->agregar(make_pair(pasos,0));
     }
-    cout<<coordenada<<endl;
 }
 
-void GPS::generarListaDeCoordenadasRelativas(){
-    /*No sirve, asi que esto no hace nada por ahora */
-    listaDeCoordenadasRelativas=listaDeCoordenadas;
+void GPS::vaciarListaDePasos(){
+    delete listaDePasos;
+    this->listaDePasos = new Lista<pair<int, int> >;
 }
 
 void GPS::vaciarListaDeCoordenadas(){
@@ -147,9 +139,52 @@ void GPS::vaciarListaDeCoordenadas(){
     this->listaDeCoordenadas = new Lista<pair<int, int> >;
 }
 
-Lista<pair<int, int> >* GPS::obtenerListaDeCoordenadasRelativas(){
-    return this->listaDeCoordenadasRelativas;
+Lista<pair<int, int> >* GPS::obtenerListaDeCoordenadas(){
+    return this->listaDeCoordenadas;
 }
+
+Lista<pair<int, int> >* GPS::obtenerListaDePasos(){
+    return this->listaDePasos;
+}
+
+void GPS::cargarCoordenadasPorMarcar(){
+    coordenadasPorMarcar->agregar(obtenerPosicionActual());
+}
+
+Lista<pair<int, int> >* GPS::obtenerCoordenadasPorMarcar(){
+    return this->coordenadasPorMarcar;
+}
+
+pair<int, int> GPS::obtenerPosicionActual(){
+    int coordenadaX;
+    int coordenadaY;
+
+    if (listaDeCoordenadas->contarElementos()!=0){
+        coordenadaX=listaDeCoordenadas->obtener(listaDeCoordenadas->contarElementos()).first;
+        coordenadaY=listaDeCoordenadas->obtener(listaDeCoordenadas->contarElementos()).second;
+    }
+    else{
+        coordenadaX=0;
+        coordenadaY=0;
+    }
+
+    pair<int, int> posicionActual=make_pair(coordenadaX, coordenadaY);
+    return posicionActual;
+}
+
+void GPS::cargarBifurcacion(string bifurcacion){
+    Bifurcacion unaBifurcacion;
+    string nombre;
+    for(unsigned int i=2; i<bifurcacion.length(); i++){
+        nombre+=bifurcacion[i];
+    }
+    /* Obtiene si la bifurcacion es en sentido N S O E */
+    char sentido=bifurcacion[1];
+
+    unaBifurcacion.cargarBifurcacion(nombre, sentido, obtenerPosicionActual());
+    bifurcaciones->agregar(unaBifurcacion);
+}
+
 
 GPS::~GPS(){
 }

@@ -32,6 +32,8 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="BuscadorDeAtajos.cpp" />
+		<Unit filename="BuscadorDeAtajos.h" />
 		<Unit filename="Caminante.cpp" />
 		<Unit filename="Caminante.h" />
 		<Unit filename="CargadorDeRecorridos.cpp" />

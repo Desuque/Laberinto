@@ -12,20 +12,45 @@ const int grosorDelCamino=1;
 const int R=0;
 const int G=1;
 const int B=2;
+const int x=0;
+const int y=1;
 
 Mapa::Mapa(){
     this->pasosVerticales=0;
     this->pasosHorizontales=0;
-    this->coordenadaVertical=300;
-    this->coordenadaHorizontal=300;
-
+    this->coordenadaVertical=0;
+    this->coordenadaHorizontal=0;
     this->colorActual=0;
-
     this->Laberinto.SetBitDepth(32);
-    this->Laberinto.SetSize(1024,1024);
+    this->Laberinto.SetSize(250,80);
 }
 
 Mapa::~Mapa(){
+}
+
+void Mapa::marcarEjes(){
+    RGBApixel colorTexto;
+    colorTexto.Red = 0 ;
+    colorTexto.Green = 0;
+    colorTexto.Blue = 0;
+
+    char Norte[6] = "Norte";
+    char Sur[4] = "Sur";
+    char Oeste[6] = "Oeste";
+    char Este[5] = "Este";
+
+    int lugarHorizontal=1024/2;
+    int horizontal_NS = 450;
+    int vertical_N = 3;
+    int vertical_S= 900;
+    int CursorVertical = 450;
+    int CursorJ = 3;
+    int tamanioFuente = 25;
+
+    PrintString(Laberinto, Norte, horizontal_NS, vertical_N, tamanioFuente, colorTexto);
+    PrintString(Laberinto, Sur, horizontal_NS, vertical_S, tamanioFuente, colorTexto);
+    //PrintString(Laberinto, Oeste, CursorVertical, CursorHorizontal, tamanioFuente, colorTexto);
+    //PrintString(Laberinto, Este, CursorVertical, CursorHorizontal, tamanioFuente, colorTexto);
 }
 
 void Mapa::cargarColor(int* rgb){
@@ -33,6 +58,9 @@ void Mapa::cargarColor(int* rgb){
 }
 
 void Mapa::cargarRecorrido(Lista<pair<int, int> >* listaDeCoordenadas){
+    coordenadaHorizontal=nuevoOrigen.first;
+    coordenadaVertical=nuevoOrigen.second;
+
     listaDeCoordenadas->iniciarCursor();
     while (listaDeCoordenadas->avanzarCursor()){
         pasosHorizontales = (listaDeCoordenadas->obtenerCursor()).first;
@@ -59,7 +87,6 @@ void Mapa::cargarRecorrido(Lista<pair<int, int> >* listaDeCoordenadas){
                 }
             }
 
-
         }
 
         /*Si los pasos son positivos*/
@@ -84,13 +111,27 @@ void Mapa::cargarRecorrido(Lista<pair<int, int> >* listaDeCoordenadas){
         coordenadaVertical+=pasosVerticales;
         coordenadaHorizontal+=pasosHorizontales;
     }
-    //Esto separa los mapas hasta que tengamos las bifurcaciones
-    this->coordenadaHorizontal=100;
-    this->coordenadaVertical=100;
-    this->pasosHorizontales=0;
-    this->pasosVerticales=0;
+}
+
+void Mapa::cargarNuevoOrigen(pair<int, int> nuevoOrigen){
+    this->nuevoOrigen=nuevoOrigen;
+}
+
+void Mapa::marcarObjetos(Lista<pair<int, int> >* coordenadasPorMarcar){
+    RGBApixel nuevoColor;
+    nuevoColor.Red = 0;
+    nuevoColor.Green = 0;
+    nuevoColor.Blue = 0;
+
+    coordenadasPorMarcar->iniciarCursor();
+    while (coordenadasPorMarcar->avanzarCursor()){
+        int coordenadaX=(coordenadasPorMarcar->obtenerCursor()).first+nuevoOrigen.first;
+        int coordenadaY=(coordenadasPorMarcar->obtenerCursor()).second+nuevoOrigen.second;
+        Laberinto.SetPixel(coordenadaX,coordenadaY,nuevoColor);
+    }
 }
 
 void Mapa::dibujarRecorridos(){
+    marcarEjes();
     Laberinto.WriteToFile("Salida.bmp");
 }

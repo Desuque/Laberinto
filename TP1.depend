@@ -24,7 +24,7 @@
 	"Objeto.h"
 	"Lista.h"
 
-1402704528 source:c:\users\desuque leandro\desktop\proyecto caminante\tp1\caminante.cpp
+1402888225 source:c:\users\desuque leandro\desktop\proyecto caminante\tp1\caminante.cpp
 	"Caminante.h"
 	"Mochila.h"
 	"GPS.h"
@@ -56,17 +56,18 @@
 	<string>
 	<iostream>
 
-1402704454 c:\users\desuque leandro\desktop\proyecto caminante\tp1\gps.h
+1402888607 c:\users\desuque leandro\desktop\proyecto caminante\tp1\gps.h
 	<string>
 	"Lista.h"
+	"Bifurcacion.h"
 
-1402704503 source:c:\users\desuque leandro\desktop\proyecto caminante\tp1\gps.cpp
+1402888572 source:c:\users\desuque leandro\desktop\proyecto caminante\tp1\gps.cpp
 	"GPS.h"
 	<string>
 	<stdlib.h>
 	<iostream>
 
-1402699512 c:\users\desuque leandro\desktop\proyecto caminante\tp1\mapa.h
+1402858403 c:\users\desuque leandro\desktop\proyecto caminante\tp1\mapa.h
 	"Lista.h"
 	"Nodo.h"
 	"EasyBMP.h"
@@ -91,7 +92,7 @@
 
 1164945762 c:\users\desuque leandro\desktop\proyecto caminante\tp1\easybmp_variousbmputilities.h
 
-1402703685 source:c:\users\desuque leandro\desktop\proyecto caminante\tp1\mapa.cpp
+1402878392 source:c:\users\desuque leandro\desktop\proyecto caminante\tp1\mapa.cpp
 	<iostream>
 	<string>
 	"Mapa.h"
@@ -112,4 +113,18 @@
 
 1163307482 source:c:\users\desuque leandro\desktop\proyecto caminante\tp1\easybmp_geometry.cpp
 	"EasyBMP_Geometry.h"
+
+1402726619 source:c:\users\desuque leandro\desktop\proyecto caminante\tp1\buscadordeatajos.cpp
+	"BuscadorDeAtajos.h"
+
+1402726422 c:\users\desuque leandro\desktop\proyecto caminante\tp1\buscadordeatajos.h
+
+1402849123 source:c:\users\desuque leandro\desktop\proyecto caminante\tp1\bifurcacion.cpp
+	<iostream>
+	<string>
+	"Bifurcacion.h"
+
+1402849590 c:\users\desuque leandro\desktop\proyecto caminante\tp1\bifurcacion.h
+	<iostream>
+	<string>
 

@@ -49,11 +49,19 @@ void Caminante::enviarAccionesAlGPS(string informacionLeida){
     unGPS.discriminarInformacion(informacionLeida);
 }
 
+
+
 void Caminante::enviarInformacionAlMapa(){
     unMapa.cargarColor(unGPS.obtenerCodigoDeColor());
-    unGPS.generarListaDeCoordenadasRelativas();
-    unMapa.cargarRecorrido(unGPS.obtenerListaDeCoordenadasRelativas());
-    unGPS.vaciarListaDeCoordenadas();
+    unMapa.cargarNuevoOrigen(unGPS.obtenerNuevoOrigen());
+    unMapa.cargarRecorrido(unGPS.obtenerListaDePasos());
+    //unMapa.marcarObjetos(unGPS.obtenerCoordenadasPorMarcar());
+
+    unGPS.vaciarListaDePasos();
+    //unGPS.vaciarListaDeCoordenadas();
+
+
+
 }
 
 void Caminante::dibujarBMP(){
