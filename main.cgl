@@ -1,0 +1,105 @@
+Error 00021. 0x104030 (Thread 0x1618):
+Pointer in freed memory: 0x022694F0-0x022694F0.
+Call Tree:
+   0x0040C96A(=main.exe:0x01:00B96A) C:\PROGRAM FILES (X86)\BORLAND\CBUILDER5\INCLUDE\vector.h#379
+   0x0040C6C6(=main.exe:0x01:00B6C6) C:\PROGRAM FILES (X86)\BORLAND\CBUILDER5\INCLUDE\vector.cc#147
+   0x0040C1FE(=main.exe:0x01:00B1FE) C:\PROGRAM FILES (X86)\BORLAND\CBUILDER5\INCLUDE\vector.h#468
+   0x0040C0ED(=main.exe:0x01:00B0ED) C:\PROGRAM FILES (X86)\BORLAND\CBUILDER5\INCLUDE\queue.h#243
+   0x0040D056(=main.exe:0x01:00C056) C:\TP3\Dijkstra.cpp#55
+   0x0040DEB8(=main.exe:0x01:00CEB8) C:\TP3\Dijkstra.cpp#141
+
+The object (0x022694F0) [size: 0 bytes] was created with new
+Call Tree:
+   0x0040B856(=main.exe:0x01:00A856) C:\PROGRAM FILES (X86)\BORLAND\CBUILDER5\INCLUDE\memory.stl#330
+   0x0040B50F(=main.exe:0x01:00A50F) C:\PROGRAM FILES (X86)\BORLAND\CBUILDER5\INCLUDE\vector.h#311
+   0x0040B287(=main.exe:0x01:00A287) C:\PROGRAM FILES (X86)\BORLAND\CBUILDER5\INCLUDE\queue.h#187
+   0x0040B127(=main.exe:0x01:00A127) C:\TP3\Dijkstra.cpp#22
+   0x00402030(=main.exe:0x01:001030) C:\TP3\Caminante.cpp#51
+   0x004231AC(=main.exe:0x01:0221AC) C:\TP3\TP.cpp#82
+
+The object (0x022694F0) was deleted with delete
+Call Tree:
+   0x00405776(=main.exe:0x01:004776) C:\PROGRAM FILES (X86)\BORLAND\CBUILDER5\INCLUDE\memory.stl#337
+   0x0040C686(=main.exe:0x01:00B686) C:\PROGRAM FILES (X86)\BORLAND\CBUILDER5\INCLUDE\vector.cc#145
+   0x0040C1FE(=main.exe:0x01:00B1FE) C:\PROGRAM FILES (X86)\BORLAND\CBUILDER5\INCLUDE\vector.h#468
+   0x0040C0ED(=main.exe:0x01:00B0ED) C:\PROGRAM FILES (X86)\BORLAND\CBUILDER5\INCLUDE\queue.h#243
+   0x0040D056(=main.exe:0x01:00C056) C:\TP3\Dijkstra.cpp#55
+   0x0040DEB8(=main.exe:0x01:00CEB8) C:\TP3\Dijkstra.cpp#141
+
+------------------------------------------
+Error 00022. 0x300010 (Thread 0x1618):
+Resource leak: The object (0x21E3894) was never deleted
+
+The object (0x021E3894) [size: 96 bytes] was created with new
+Call Tree:
+   0x0040A4BB(=main.exe:0x01:0094BB) C:\PROGRAM FILES (X86)\BORLAND\CBUILDER5\INCLUDE\rw/ctype.h#494
+   0x0040A209(=main.exe:0x01:009209) C:\PROGRAM FILES (X86)\BORLAND\CBUILDER5\INCLUDE\rw/locimpl.h#454
+   0x00435149(=main.exe:0x01:034149)
+   0x00409DAD(=main.exe:0x01:008DAD) C:\PROGRAM FILES (X86)\BORLAND\CBUILDER5\INCLUDE\rw/usefacet.h#72
+   0x0042948A(=main.exe:0x01:02848A)
+   0x0042D143(=main.exe:0x01:02C143)
+
+------------------------------------------
+Error 00023. 0x300010 (Thread 0x1618):
+Resource leak: The object (0x21E3368) was never deleted
+
+The object (0x021E3368) [size: 96 bytes] was created with new
+Call Tree:
+   0x0040A4BB(=main.exe:0x01:0094BB) C:\PROGRAM FILES (X86)\BORLAND\CBUILDER5\INCLUDE\rw/ctype.h#494
+   0x0040A209(=main.exe:0x01:009209) C:\PROGRAM FILES (X86)\BORLAND\CBUILDER5\INCLUDE\rw/locimpl.h#454
+   0x00435149(=main.exe:0x01:034149)
+   0x00409DAD(=main.exe:0x01:008DAD) C:\PROGRAM FILES (X86)\BORLAND\CBUILDER5\INCLUDE\rw/usefacet.h#72
+   0x004098B3(=main.exe:0x01:0088B3) C:\PROGRAM FILES (X86)\BORLAND\CBUILDER5\INCLUDE\ios.h#375
+   0x00428D1A(=main.exe:0x01:027D1A)
+
+------------------------------------------
+Functions called:
+ fclose (1 times)
+ fwrite (166 times)
+ ceil (1 times)
+ fopen (1 times)
+ asin (448 times)
+ acos (448 times)
+ sqrt (449 times)
+ sprintf (5 times)
+ memset (927 times)
+ close (1 times)
+ memcmp (4663 times)
+ open (1 times)
+ read (8 times)
+ delete (6133 times)
+ write (54 times)
+ lseek (147 times)
+ fflush (58 times)
+ delete[] (655 times)
+ strchr (4 times)
+ strstr (2 times)
+ free (20 times)
+ _lsetlocale (6 times)
+ new[] (666 times)
+ new (6144 times)
+ calloc (7 times)
+ strlen (1854 times)
+ realloc (1 times)
+ strdup (5 times)
+ malloc (7 times)
+ memcpy (27648 times)
+Resource types used:
+ object array (666 allocs, 198 max)
+ object (6144 allocs, 938 max)
+ memory block (20 allocs, 10 max)
+ file stream (1 allocs, 1 max)
+ file handle (2 allocs, 1 max)
+Modules used:
+ 00400000 07/16/2014 03:36:26 C:\TP3\main.exe
+ 0CD00000 01/31/2000 05:00:00 C:\Program Files
+ (x86)\Borland\CBuilder5\Bin\CG32.DLL
+ 75470000 05/30/2013 20:08:28 C:\WINDOWS\SYSTEM32\KERNEL32.DLL
+ 75760000 09/20/2012 01:10:10 C:\WINDOWS\SYSTEM32\USER32.DLL
+ 75DE0000 11/06/2012 00:51:48 C:\WINDOWS\SYSTEM32\KERNELBASE.dll
+ 75E90000 07/25/2012 23:27:30 C:\WINDOWS\system32\IMM32.DLL
+ 774B0000 10/01/2013 19:22:20 C:\WINDOWS\SYSTEM32\GDI32.dll
+ 775B0000 07/26/2012 00:19:18 C:\WINDOWS\SYSTEM32\msvcrt.dll
+ 776A0000 04/09/2013 19:29:52 C:\WINDOWS\SYSTEM32\MSCTF.dll
+ 77840000 04/08/2013 20:39:16 C:\WINDOWS\SYSTEM32\ntdll.dll
+==========================================

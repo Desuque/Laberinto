@@ -1,6 +1,4 @@
 #include "Objeto.h"
-#include <string>
-#include <iostream>
 
 using namespace std;
 
@@ -28,14 +26,6 @@ string Objeto::obtenerNombre(){
 
 int Objeto::obtenerCantidad(){
     return this->cantidad;
-}
-
-void Objeto::reducirCantidad(){
-    cantidad--;
-}
-
-void Objeto::aumentarCantidad(){
-    cantidad++;
 }
 
 Objeto::~Objeto()

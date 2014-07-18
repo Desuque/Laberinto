@@ -1,0 +1,19 @@
+USEUNIT("main.cpp");
+USEUNIT("Caminante.cpp");
+USEUNIT("Camino.cpp");
+USEUNIT("CargadorDeAtajos.cpp");
+USEUNIT("CargadorDeRecorridos.cpp");
+USEUNIT("Dijkstra.cpp");
+USEUNIT("EasyBMP.cpp");
+USEUNIT("EasyBMP_Font.cpp");
+USEUNIT("EasyBMP_Geometry.cpp");
+USEUNIT("GPS.cpp");
+USEUNIT("GraficadorDeMapa.cpp");
+USEUNIT("Mochila.cpp");
+USEUNIT("Objeto.cpp");
+USEUNIT("PuntoDeInteres.cpp");
+USEUNIT("TP.cpp");
+//---------------------------------------------------------------------------
+This file is used by the project manager only and should be treated like the project file
+
+main

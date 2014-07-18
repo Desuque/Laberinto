@@ -7,9 +7,6 @@
 #include <string>
 #include <sstream>
 
-using namespace std;
-
-
 /*
  * Una Lista es una colección dinámica de elementos dispuestos en una secuencia.
  *

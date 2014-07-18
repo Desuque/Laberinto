@@ -3,23 +3,47 @@
 
 #include <string>
 
-using namespace std;
-
 class Objeto
 {
 private:
-        int cantidad;
-        string nombre;
+    int cantidad;
+    std::string nombre;
 public:
-        Objeto();
-        ~Objeto();
-        Objeto(string nombreObjeto);
-        Objeto(string nombreObjeto, unsigned int cantidad);
-        string obtenerNombre();
-        int obtenerCantidad();
+    /*
+    * Pre:
+    * Post: Crea un nuevo objeto vacio
+    */
+    Objeto();
 
-        void aumentarCantidad();
-        void reducirCantidad();
+    /*
+    * Pre:
+    * Post: Crea un nuevo objeto con su respectivo nombre y cantidad 1
+    */
+    Objeto(std::string nombreObjeto);
+
+    /*
+    * Pre:
+    * Post: Crea un nuevo objeto con su respectivo nombre y cantidad arbitraria
+    */
+    Objeto(std::string nombreObjeto, unsigned int cantidad);
+
+    /*
+    * Pre: El objeto debe existir
+    * Post: Devuelve el nombre asociado al objeto
+    */
+    std::string obtenerNombre();
+
+    /*
+    * Pre: El objeto debe existir
+    * Post: Devuelve la cantidad asociada al objeto
+    */
+    int obtenerCantidad();
+
+    /*
+    * Pre:
+    * Post: Libera los recursos asociados al Objeto
+    */
+    ~Objeto();
 
 };
 
